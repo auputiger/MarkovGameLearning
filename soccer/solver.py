@@ -22,7 +22,7 @@ class Solver:
         self.init_state = State(Player(1, (3, 0), False),
                                 Player(2, (1, 0), True))
 
-        # State for gather Q-value differences
+        # State for gathering Q-value differences
         self.q_stat_state = State(Player(1, (2, 0), False),
                                   Player(2, (1, 0), True))
 
@@ -31,6 +31,14 @@ class Solver:
         self.V2 = defaultdict(lambda: 1)
 
     def q_learning(self, time_steps, alpha, gamma):
+        """
+        Normal Q-learning algorithm used in MDP's, completely ignores the
+        other player.
+        :param time_steps: Number of time steps to train on.
+        :param alpha: Learning rate
+        :param gamma: Discount factor
+        :return: Statistics gathered during training
+        """
         # List of gathered statistics
         statistics = list()
 
@@ -105,6 +113,14 @@ class Solver:
         return statistics
 
     def friend_q_learning(self, time_steps, alpha, gamma):
+        """
+        Friend Q-Learning algorithm. Assumes the other player is an ally and
+        will always attempt to help.
+        :param time_steps: Number of time steps to train on.
+        :param alpha: Learning rate
+        :param gamma: Discount factor
+        :return: Statistics gathered during training.
+        """
         # gathered stats
         statistics = list()
 
@@ -182,6 +198,14 @@ class Solver:
         return statistics
 
     def foe_q_learning(self, time_steps, alpha, gamma):
+        """
+        Foe Q-learning. Assumes the other player will always attempt to minimize
+        its reward.
+        :param time_steps: Number of time steps to train on.
+        :param alpha: Learning rate
+        :param gamma: Discount factor
+        :return: Statistics gathered during training.
+        """
         # turn lp solver logging off
         options['show_progress'] = False
 
@@ -288,6 +312,15 @@ class Solver:
         return statistics
 
     def ce_q_learning(self, time_steps, alpha, gamma):
+        """
+        Correlated Q-Learning algorithm. Players share their knowledge of the
+        game, and attempt to maximize some common goal. In this case, they are
+        attempting to maximize the sum of their rewards.
+        :param time_steps: Number of time steps to train on.
+        :param alpha: Learning rate
+        :param gamma: Discount factor
+        :return: Statistics gathered during training
+        """
         # Turn off lp logging
         options['show_progress'] = False
 
