@@ -88,11 +88,15 @@ class State:
         return str((str(self.player1), str(self.player2)))
 
     def reward_value(self):
+        """
+        :return: The reward for player 1, since its a zero sum game, player 2's
+        reward is the negation of the reward.
+        """
         if self.player1.has_ball:
             x, y = self.player1.cords
             if x == 0:
                 return 100
-            elif x == 3:
+            elif x == State.FIELD_DIMENSIONS[0] - 1:
                 return -100
             else:
                 return 0
@@ -100,7 +104,7 @@ class State:
             x, y = self.player2.cords
             if x == 0:
                 return 100
-            elif x == 3:
+            elif x == State.FIELD_DIMENSIONS[0] - 1:
                 return -100
             else:
                 return 0
@@ -117,9 +121,9 @@ class State:
         if action == Actions.UP:
             y = max(0, y - 1)
         elif action == Actions.DOWN:
-            y = min(1, y + 1)
+            y = min(State.FIELD_DIMENSIONS[1] - 1, y + 1)
         elif action == Actions.LEFT:
             x = max(0, x - 1)
         elif action == Actions.RIGHT:
-            x = min(3, x + 1)
+            x = min(State.FIELD_DIMENSIONS[0] - 1, x + 1)
         return x, y
