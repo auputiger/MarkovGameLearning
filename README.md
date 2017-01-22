@@ -1,13 +1,15 @@
-# rl_project3
-name: Jesse Stills
-<br>
-gatech username: jstills3
-<br>
-<br>
-Repository for project 3 of Reinforcement Learning.
+# Markov Game Learning Convergence Experiment
+
+## Description
+The purpose of this project was to test the convergence of four different types of 
+learning algorithms in a simple zero sum markov game (4x2 grid soccer game with 2 players).
+Each algorithm simulates 1,000,000 games and checks if the Q-value of a particular state
+converges. The algorithms tested are: Q-Learning, Friend Q-Learning, Foe Q-Learning, and Correlated Q-Learning.
+Foe-Q and Correlated-Q use linear programming.
+
 
 ## Project structure
-* rl_project3
+* MarkovGameLearning
     * soccer
         * actions.py
         * player.py
