@@ -1,0 +1,6 @@
+*.iml
+*.pyc
+__pycache__/
+data2.txt
+data3.txt
+data_exp1.txt
